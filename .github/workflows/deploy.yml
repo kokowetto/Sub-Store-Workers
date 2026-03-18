@@ -142,6 +142,8 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
         run: |
+          sed -i '/compatibility_flags/d' wrangler.toml
+          sed -i '1s/^/compatibility_flags = ["nodejs_compat"]\n/' wrangler.toml
           bun run deploy:action
           echo "Deploy completed"
 
